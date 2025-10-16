@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lovely Offset Printers · Manager</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Firebase SDKs (compat versions) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+  <!-- Load config & app.js in correct order -->
+  <script src="firebaseConfig.js"></script>
+  <script src="app.js" defer></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f8f9fa; }
+    .container { max-width: 1100px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .date-box { font-weight: bold; margin-bottom: 15px; font-size: 18px; color: #007bff; }
+    #jobForm input { margin: 5px 5px 5px 0; padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; }
+    #jobForm button { background: #007bff; color: #fff; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+    .top-tools { margin: 15px 0; display:flex; justify-content:flex-end; }
+    .top-tools input { padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; width: 50%; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 5px; overflow: hidden; }
+    th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #007bff; color: #fff; }
+    .pill.error { background-color: #dc3545; color: #fff; border: none; padding: 4px 8px; border-radius: 20px; cursor: pointer; }
+    .pill { background: #007bff; color:#fff; padding:4px 8px; border-radius:20px; border:none; text-decoration:none; }
+  </style>
+</head>
+
+<body>
+  <header class="brand-header sticky">
+    <div class="brand">Lovely Offset Printers</div>
+    <div class="right-actions">
+      <a class="pill" href="past.html">📜 Past</a>
+      <a class="pill" href="worker.html">👷 Worker</a>
+      <button id="logoutBtn" type="button" class="pill error">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Manager Dashboard</h2>
+    <div class="date-box" id="currentDate"></div>
+
+    <form id="jobForm">
+      <input type="text" id="jobNo" placeholder="Job No" required />
+      <input type="text" id="jobName" placeholder="Job Name" required />
+      <input type="text" id="formName" placeholder="Form" />
+      <input type="number" id="quantity" placeholder="Quantity" required />
+      <input type="text" id="workerName" placeholder="Worker Name" required />
+      <input type="text" id="machineName" placeholder="Machine Name" required />
+      <button type="submit">➕ Add Job</button>
+    </form>
+
+    <div class="top-tools">
+      <input type="text" id="searchInput" placeholder="Search jobs..."/>
+    </div>
+
+    <table id="jobTable">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Job No</th>
+          <th>Job Name</th>
+          <th>Form</th>
+          <th>Worker</th>
+          <th>Machine</th>
+          <th>Qty</th>
+          <th>Good</th>
+          <th>Waste</th>
+          <th>Completed</th>
+          <th>Action</th> <!-- ✅ Correct column for Delete -->
+        </tr>
+      </thead>
+      <tbody id="jobTableBody"></tbody>
+    </table>
+  </div>
+</body>
+</html>

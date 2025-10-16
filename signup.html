@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup · Lovely Offset Printers</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <input type="text" id="signupName" placeholder="Full Name" required/>
+      <input type="email" id="signupEmail" placeholder="Email" required/>
+      <input type="password" id="signupPassword" placeholder="Password" required/>
+      <select id="signupRole">
+        <option value="worker">Worker</option>
+        <option value="manager">Manager</option>
+      </select>
+      <div id="machineRow">
+        <input type="text" id="signupMachine" placeholder="Machine Name"/>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+</body>
+</html>

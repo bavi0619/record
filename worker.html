@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lovely Offset Printers · Worker</title>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Firebase compat -->
+<!-- Firebase SDKs (compat versions) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<!-- Your Firebase config -->
+<script src="firebaseConfig.js"></script>
+
+<!-- Your app logic -->
+<script src="app.js"></script>
+
+</head>
+<body>
+  <header class="brand-header sticky">
+    <div class="brand">Lovely Offset Printers</div>
+    <div class="right-actions">
+      <button id="logoutBtn" type="button" class="pill error">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Worker View</h2>
+    <div class="date-box" id="currentDate"></div>
+
+    <!-- ✅ Machine info for worker -->
+    <div class="machine-box">
+      <strong>Machine:</strong> <span id="workerMachineName">Loading...</span>
+    </div>
+
+    <div class="top-tools">
+      <input type="text" id="searchInput" placeholder="Search jobs..."/>
+    </div>
+
+    <table id="jobTable">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Job No</th>
+          <th>Job Name</th>
+          <th>Form</th>
+          <th>Worker</th>
+          <th>Qty</th>
+          <th>Good</th>
+          <th>Waste</th>
+          <th>Remark</th>
+          <th>Save</th>
+        </tr>
+      </thead>
+      <tbody id="jobTableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    // ✅ Worker Page Script
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) return location.href = "index.html";
+
+      const snap = await db.ref("users/" + user.uid).once("value");
+      const profile = snap.val();
+      if (!profile || profile.role !== "worker") {
+        return location.href = "manager.html";
+      }
+
+      // show date & machine
+      document.getElementById("currentDate").innerText =
+        new Date().toLocaleDateString();
+      document.getElementById("workerMachineName").innerText =
+        profile.machineName || "N/A";
+
+      const tbody = document.getElementById("jobTableBody");
+      const searchInput = document.getElementById("searchInput");
+
+      db.ref("jobs").on("value", (snap) => {
+        tbody.innerHTML = "";
+        let i = 1;
+        snap.forEach((child) => {
+          const job = child.val();
+
+          // only show active jobs for this worker's machine
+          if (job.completed || job.machineName !== profile.machineName) return;
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${i++}</td>
+            <td>${job.jobNo}</td>
+            <td>${job.jobName}</td>
+            <td>${job.formName}</td>
+            <td>${job.workerName}</td>
+            <td>${job.quantity}</td>
+            <td contenteditable="true">${job.good}</td>
+            <td contenteditable="true">${job.waste}</td>
+            <td contenteditable="true">${job.remark || ""}</td>
+            <td><button class="save-btn">Save</button></td>
+          `;
+
+          // ✅ Save button
+          tr.querySelector(".save-btn").addEventListener("click", async () => {
+            const cells = tr.querySelectorAll("td");
+            const updates = {
+              good: cells[6].innerText.trim(),
+              waste: cells[7].innerText.trim(),
+              remark: cells[8].innerText.trim(),
+              completed: true,
+              completedDate: new Date().toLocaleDateString() // ✅ important
+            };
+            await db.ref("jobs/" + child.key).update(updates);
+            alert("Job saved to Past Records!");
+          });
+
+          tbody.appendChild(tr);
+        });
+
+        // ✅ search filter
+        searchInput.addEventListener("input", () => {
+          const term = searchInput.value.toLowerCase();
+          Array.from(tbody.rows).forEach((row) => {
+            row.style.display = row.innerText.toLowerCase().includes(term)
+              ? ""
+              : "none";
+          });
+        });
+      });
+    });
+
+    // ✅ Logout
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn?.addEventListener("click", async () => {
+      await auth.signOut();
+      location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

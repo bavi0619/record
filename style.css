@@ -1,0 +1,478 @@
+/* ===== Global Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f9;
+  color: #333;
+}
+
+/* ===== Login / Signup Page ===== */
+.auth-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007bff, #6f42c1);
+}
+
+.auth-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 400px; /* increased width */
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: #f1f1f1;
+  font-weight: bold;
+  color: #333;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+}
+
+/* Forms */
+.auth-form {
+  display: none;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.auth-form .form-row {
+  margin-bottom: 18px; /* more vertical space */
+}
+
+.auth-form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 12px;  /* larger, spacier */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,123,255,0.4);
+}
+
+/* Password wrapper for 👁 */
+.password-wrapper {
+  position: relative;
+}
+.password-wrapper input {
+  padding-right: 34px; /* leave space for icon */
+}
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #666;
+  pointer-events: none;
+}
+
+/* Checkbox row */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+/* Buttons */
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 8px;
+}
+
+.primary-btn:hover {
+  background: #0056b3;
+}
+
+.pill {
+  margin-left: 10px;
+  padding: 6px 12px;
+  background: #eee;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.pill.error {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Forgot Password */
+.forgot {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Header ===== */
+.brand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ===== Containers ===== */
+.container {
+  padding: 20px;
+}
+
+.date-box {
+  background: #eee;
+  padding: 8px 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ===== Tables ===== */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  font-size: 15px;
+}
+
+table th {
+  background: #6a11cb; /* purple theme */
+  color: white;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #f3e9ff;
+}
+
+/* Editable cells highlight */
+td[contenteditable="true"] {
+  background: #fffef3;
+  cursor: text;
+}
+td[contenteditable="true"]:focus {
+  outline: 2px solid #d0b3ff;
+}
+
+/* Manager Form */
+#managerFormWrap {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+form#jobForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+}
+
+form#jobForm input {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+form#jobForm button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  grid-column: span 2;
+}
+
+/* Past Records */
+#pastRecords table {
+  margin: 20px auto;
+  width: 95%;
+  border-collapse: collapse;
+}
+
+#pastRecords th {
+  background: #6a11cb;
+  color: #fff;
+  padding: 12px;
+}
+
+#pastRecords td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+.del-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e74c3c;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.del-btn:hover {
+  background: #c0392b;
+}
+
+/* Action Buttons */
+button.del-btn, button.save-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button.del-btn {
+  background: #ef4444;
+  color: #fff;
+}
+
+button.del-btn:hover {
+  background: #b91c1c;
+}
+
+button.save-btn {
+  background: #10b981;
+  color: #fff;
+}
+
+button.save-btn:hover {
+  background: #047857;
+}
+/* =======================
+   💾 PAST RECORDS STYLING
+   ======================= */
+
+.date-section {
+  background: #ffffff;
+  border: 2px solid #007bff25;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 15px 20px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.date-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f6ff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border-left: 4px solid #007bff;
+}
+
+.date-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.date-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.date-section thead {
+  background: #007bff;
+  color: #fff;
+}
+
+.date-section th, 
+.date-section td {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+}
+
+.date-section tbody tr:hover {
+  background: #f9fbff;
+}
+
+.exportDateBtn {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+
+.exportDateBtn:hover {
+  background: #0056c8;
+}
+
+.del-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.del-btn:hover {
+  background: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .date-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .exportDateBtn {
+    width: 100%;
+  }
+}
+
+/* ===== Past Records Responsive (Mobile) ===== */
+@media screen and (max-width: 768px) {
+  .date-section table, 
+  .date-section th, 
+  .date-section td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .date-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .exportDateBtn {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 13px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  form#jobForm {
+    grid-template-columns: 1fr; /* stack form fields on small screens */
+  }
+
+  form#jobForm button {
+    grid-column: span 1;
+  }
+}

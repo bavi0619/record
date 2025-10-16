@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lovely Offset Printers · Past Records</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Firebase compat -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Firebase config + App logic -->
+  <script src="firebaseConfig.js"></script>
+  <script src="app.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f8f9fa; }
+    .container { max-width: 1100px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .date-section { margin-bottom: 30px; border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #f1f5f9; }
+    .date-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .date-header h3 { margin: 0; font-size: 18px; font-weight: bold; color: #007bff; }
+    .top-tools { display: flex; justify-content: space-between; margin-bottom: 15px; }
+    .top-tools input { width: 60%; padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; }
+    .primary-btn { background: #007bff; color: #fff; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 5px; overflow: hidden; }
+    th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+    th { background: #007bff; color: #fff; }
+    .pill.error { background-color: #dc3545; color: #fff; border: none; padding: 4px 8px; border-radius: 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header class="brand-header sticky">
+    <div class="brand">Lovely Offset Printers</div>
+    <div class="right-actions">
+      <a class="pill" href="manager.html">🧑‍💼 Manager</a>
+      <button id="logoutBtn" class="pill error">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Past Records (Manager Only)</h2>
+
+    <div class="top-tools">
+      <input type="text" id="pastSearch" placeholder="Search past records..."/>
+    </div>
+
+    <div id="pastRecords"></div>
+  </div>
+</body>
+</html>
